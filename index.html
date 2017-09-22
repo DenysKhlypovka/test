@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Company Management</title>
+	<meta charset="utf-8" />
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+<div style="position: absolute;">
+
+	<div style="position: absolute; width: 250px;">
+		<h2>Add new Company</h2>
+		<form name="add" method="post" action = "/new" >
+			<label>Company Name:</label><br/><input name="name"/><br/><br/>
+			<label>Estimated Earnings, K:</label><br/><input name="earn"/><br/><br/>
+			<label>Parent Company:</label><br/><input name="parent"/><br/><br/>
+			<button type="button" name="add" onclick="Create()">Send</button>
+		</form>
+	</div>
+
+	<div style="position: relative; left:300px; width: 250px;">
+		<h2>Delete Company</h2>
+		<form name="delete" method="post" action = "/delete">
+			<label>Company Name:</label><br/><input name="name"/><br/><br/>
+			<button type="button" name="delete" onclick="Delete()">Send</button>
+		</form>
+	</div>
+
+</div>
+
+
+<div style="position: relative;">
+
+	<div style="position: absolute; left:600px; width: 250px;">
+		<h2>View Company</h2>
+		<form name="view" method="post" action = "/view">
+			<label>Company Name:</label><br/><input name="name"/><br/><br/>
+			<button type="button" name="view" onclick="View()">Send</button>
+		</form>
+	</div>
+
+	<div style="position: absolute; left:900px; width: 250px;">
+		<h2>Edit Company</h2>
+		<form name="update" method="post" action = "/update">
+			<label>Company Name:</label><br/><input name="oldName"/><br/><br/>
+			<label>New Name:</label><br/><input name="name"/><br/><br/>
+			<label>Edit Estimated Earnings:</label><br/><input name="earn"/><br/><br/>
+			<label>Change Parent Company:</label><br/><input name="parent"/><br/><br/>
+			<button type="button" name="update" onclick="Edit()">Send</button>
+		</form>
+	</div>
+
+</div>
+
+
+<div style="position: absolute; top:350px;">
+<h3><u>Server response:</u></h3>
+<p class="output"></p>
+</div>
+
+<script>
+
+		function Output(data){
+			var dt = new Date();
+			var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+			$(".output").html("(" + time + ") " + data)
+		}
+
+		function View() {
+
+			var form = document.forms["view"];
+            var name = form.elements["name"].value;
+
+            $.ajax({
+                url: "/view/"+name,
+                type: "GET",
+                contentType: "application/json",
+                success: function (data) {
+                   Output(data); 
+                }
+            });
+        }
+        // Добавление пользователя
+        function Create() {
+
+        	var form = document.forms["add"];
+            var name = form.elements["name"].value;
+            var earn = form.elements["earn"].value;
+            var parent = form.elements["parent"].value;
+
+            $.ajax({
+                url: "/new",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({name: name, earn: earn, parent: parent}),
+                success: function (data) {
+                    Output(data);  
+                }
+            })
+        }
+        // Изменение пользователя
+        function Edit() {
+
+        	var form = document.forms["update"];
+            var name = form.elements["name"].value;
+            var oldName = form.elements["oldName"].value;
+            var earn = form.elements["earn"].value;
+            var parent = form.elements["parent"].value;
+
+            $.ajax({
+                url: "/update",
+                contentType: "application/json",
+                method: "PUT",
+                data: JSON.stringify({oldName: oldName, name: name, earn: earn, parent: parent}),
+                success: function (data) {
+                    Output(data); 
+                }
+            })
+        }
+  
+        // Удаление пользователя
+        function Delete() {
+
+			var form = document.forms["delete"];
+            var name = form.elements["name"].value;
+
+            $.ajax({
+                url: "/delete/"+name,
+                contentType: "application/json",
+                method: "DELETE",
+                success: function (data) {
+                    Output(data); 
+                }
+            })
+        }
+
+  </script>
+</body>
+<html>

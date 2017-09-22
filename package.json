@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.22",
+    "dynamic-array": "^1.0.35"
+  }
+  "engines": {
+  	"node": "6.11.3"
+  }
+}

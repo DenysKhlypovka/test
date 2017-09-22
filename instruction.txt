@@ -1,0 +1,7 @@
+1) To Add a company fill inputboxes in the "Add new Company" section. If the company to add is a main company, "Parent Company" field should be ignored. 
+2) To Delete a company fill inputbox in the "Delete Company" section.
+3) To Inspect a company fill inputbox in the "View Company" section. 
+4) To Edit a company fill inputboxes in the "Edit Company" section. "Company Name" field is mandatory. "New Name", "Edit Estimated Earnings", 
+"Change Parent Company" fields to be filled in order to change the corresponding values.
+
+"Server response" section shows the status of the last request sent.
