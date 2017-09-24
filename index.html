@@ -8,7 +8,7 @@
 <body>
 <div style="position: absolute;">
 
-	<div style="position: absolute; width: 250px;">
+	<div style="position: absolute; width: 275px;">
 		<h2>Add new Company</h2>
 		<form name="add" method="post" action = "/new" >
 			<label>Company Name:</label><br/><input name="name"/><br/><br/>
@@ -31,7 +31,7 @@
 
 <div style="position: relative;">
 
-	<div style="position: absolute; left:600px; width: 250px;">
+	<div style="position: absolute; left:575px; width: 250px;">
 		<h2>View Company</h2>
 		<form name="view" method="post" action = "/view">
 			<label>Company Name:</label><br/><input name="name"/><br/><br/>
@@ -39,7 +39,7 @@
 		</form>
 	</div>
 
-	<div style="position: absolute; left:900px; width: 250px;">
+	<div style="position: absolute; left:850px; width: 250px;">
 		<h2>Edit Company</h2>
 		<form name="update" method="post" action = "/update">
 			<label>Company Name:</label><br/><input name="oldName"/><br/><br/>
@@ -51,6 +51,13 @@
 	</div>
 
 </div>
+
+
+<div style="position: absolute; left:1100px; width: 250px;">
+		<h2 >Show Companies Tree</h2>
+		<button type="button" name="tree" onclick="Tree()">Send</button>
+</div>
+
 
 
 <div style="position: absolute; top:350px;">
@@ -132,6 +139,17 @@
                     Output(data); 
                 }
             })
+        }
+
+        function Tree(){
+            $.ajax({
+                url: "/tree/",
+                type: "GET",
+                contentType: "application/json",
+                success: function (data) {
+                   Output(data); 
+                }
+            });
         }
 
   </script>
